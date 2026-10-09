@@ -1,0 +1,5 @@
+Devicon language identification assets
+Source: https://github.com/devicons/devicon
+Commit: 7330accdbc47e2dc0c19789a48533c4a3c50fe58
+License: MIT (see LICENSE)
+Language logos remain trademarks of their respective owners.

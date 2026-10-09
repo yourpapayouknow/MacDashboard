@@ -1,0 +1,5 @@
+MingCute Icons
+https://github.com/mingcute-design/mingcute-icons
+Commit: ca98bb55513a22ff0dab713aaf7870b512944653
+Apache-2.0
+Selected regular SVGs combined into a sprite; colors changed to currentColor.

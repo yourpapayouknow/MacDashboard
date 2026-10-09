@@ -1,0 +1,16 @@
+/refrence/
+.build/
+.swiftpm/
+.codegraph/
+DerivedData/
+node_modules/
+WebUI/dist/
+/dist/
+.DS_Store
+
+# 本地开发记录
+/history/
+/task_plan.md
+/findings.md
+/progress.md
+/docs/archive/

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.iwmei.macdashboard.monitor-helper.native</string>
+    <key>BundleProgram</key>
+    <string>Contents/MacOS/PanelMonitorHelper</string>
+    <key>MachServices</key>
+    <dict>
+        <key>com.iwmei.macdashboard.monitor-helper.native</key>
+        <true/>
+    </dict>
+    <key>ProcessType</key>
+    <string>Background</string>
+    <key>RunAtLoad</key>
+    <false/>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PANEL_ALLOWED_UID</key>
+        <string>__UID__</string>
+    </dict>
+</dict>
+</plist>

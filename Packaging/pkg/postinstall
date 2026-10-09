@@ -1,0 +1,31 @@
+#!/bin/zsh
+set -euo pipefail
+
+readonly serviceid="com.iwmei.macdashboard.monitor-helper"
+readonly appdir="/Library/Application Support/iwmei/MacDashboard.app"
+readonly oldplist="/Library/LaunchDaemons/${serviceid}.plist"
+readonly oldhelper="/Library/PrivilegedHelperTools/${serviceid}"
+readonly backupdir="/Library/Application Support/iwmei/LegacyHelper"
+
+# Restores the legacy daemon when native registration cannot complete.
+function restoreold() {
+    [[ ! -e "${backupdir}/${serviceid}.plist" ]] || /bin/mv "${backupdir}/${serviceid}.plist" "${oldplist}"
+    [[ ! -e "${backupdir}/${serviceid}" ]] || /bin/mv "${backupdir}/${serviceid}" "${oldhelper}"
+    [[ ! -e "${oldplist}" ]] || /bin/launchctl bootstrap system "${oldplist}"
+    [[ ! -e "${oldplist}" ]] || /bin/launchctl kickstart -k "system/${serviceid}"
+}
+
+# Migrates only the known legacy helper paths through Installer authorization.
+function migrate() {
+    /bin/mkdir -p "${backupdir}"
+    /bin/launchctl bootout "system/${serviceid}" 2>/dev/null || true
+    [[ ! -e "${oldplist}" ]] || /bin/mv "${oldplist}" "${backupdir}/${serviceid}.plist"
+    [[ ! -e "${oldhelper}" ]] || /bin/mv "${oldhelper}" "${backupdir}/${serviceid}"
+
+    if ! "${appdir}/Contents/MacOS/PanelHost" reregister; then
+        restoreold
+        return 1
+    fi
+}
+
+migrate
